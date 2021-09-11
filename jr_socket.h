@@ -32,7 +32,20 @@ int jr_socket_setupServerSocket(int port, jr_server_socket *serverSocket);
 
 int jr_socket_accept(jr_server_socket serverSocket, jr_socket *socket);
 
+/**
+ * Receives up to `buffer_size` bytes (but can return fewer).
+ * 
+ * Returns actual number of bytes received on success, -1 on error, or
+ * 0 on an orderly shutdown of the connection.
+ */
 int jr_socket_receive(jr_socket socket, char* buffer, int buffer_size);
+
+/**
+ * Sends all the bytes given in the buffer.
+ * 
+ * Returns 0 on success, -1 on error.
+ */
+int jr_socket_send(jr_socket socket, char* buffer, int buffer_size);
 
 void jr_socket_closeSocket(jr_socket socket);
 

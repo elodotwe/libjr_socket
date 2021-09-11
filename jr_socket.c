@@ -83,6 +83,18 @@ int jr_socket_receive(jr_socket socket, char* buffer, int buffer_size) {
     return result;
 }
 
+int jr_socket_send(jr_socket socket, char* buffer, int buffer_size) {
+    while (buffer_size) {
+        int result = send(socket._socket, buffer, buffer_size, 0);
+        if (result == -1) {
+            perror("send");
+            return -1;
+        }
+        buffer_size -= result;
+    }
+    return 0;
+}
+
 void jr_socket_closeSocket(jr_socket socket) {
     close(socket._socket);
 }
